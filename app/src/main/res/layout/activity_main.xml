@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="d4"
-        android:id="@+id/textView"
+        android:id="@+id/d4Label"
         android:layout_alignTop="@+id/d4numBox"
         android:layout_centerHorizontal="true" />
 
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="d6"
-        android:id="@+id/textView2"
+        android:id="@+id/d6Label"
         android:layout_alignTop="@+id/d6numBox"
         android:layout_centerHorizontal="true" />
 
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="d8"
-        android:id="@+id/textView3"
+        android:id="@+id/d8Label"
         android:layout_alignTop="@+id/d8numBox"
         android:layout_centerHorizontal="true" />
 
@@ -137,7 +137,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="d10"
-        android:id="@+id/textView4"
+        android:id="@+id/d10Label"
         android:layout_alignTop="@+id/d10numBox"
         android:layout_centerHorizontal="true" />
 
@@ -146,7 +146,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="d12"
-        android:id="@+id/textView5"
+        android:id="@+id/d12Label"
         android:layout_alignTop="@+id/d12numBox"
         android:layout_centerHorizontal="true" />
 
@@ -155,7 +155,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="d20"
-        android:id="@+id/textView6"
+        android:id="@+id/d20Label"
         android:layout_alignTop="@+id/d20numBox"
         android:layout_centerHorizontal="true" />
 
@@ -164,8 +164,118 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="d%"
-        android:id="@+id/textView7"
+        android:id="@+id/d100Label"
         android:layout_alignTop="@+id/d100numBox"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/d4Bonus"
+        android:backgroundTint="#ff646464"
+        android:background="#ff000000"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/d6Bonus"
+        android:backgroundTint="#ff646464"
+        android:background="#ff000000"
+        android:layout_above="@+id/d8numBox"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/d8Bonus"
+        android:backgroundTint="#ff646464"
+        android:background="#ff000000"
+        android:layout_above="@+id/d10numBox"
+        android:layout_alignRight="@+id/d6Bonus"
+        android:layout_alignEnd="@+id/d6Bonus" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/d10Bonus"
+        android:backgroundTint="#ff646464"
+        android:background="#ff000000"
+        android:layout_above="@+id/d12numBox"
+        android:layout_alignRight="@+id/d8Bonus"
+        android:layout_alignEnd="@+id/d8Bonus" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/d12Bonus"
+        android:backgroundTint="#ff646464"
+        android:background="#ff000000"
+        android:layout_above="@+id/d20numBox"
+        android:layout_alignRight="@+id/d10Bonus"
+        android:layout_alignEnd="@+id/d10Bonus" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/d20Bonus"
+        android:backgroundTint="#ff646464"
+        android:background="#ff000000"
+        android:layout_above="@+id/d100numBox"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/d100Bonus"
+        android:backgroundTint="#ff646464"
+        android:background="#ff000000"
+        android:layout_alignBottom="@+id/d100numBox"
+        android:layout_alignRight="@+id/d20Bonus"
+        android:layout_alignEnd="@+id/d20Bonus" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="ROLL DICE"
+        android:id="@+id/rollButton"
+        android:layout_below="@+id/d100numBox"
+        android:layout_toLeftOf="@+id/d8Label"
+        android:layout_toStartOf="@+id/d8Label" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="SAVE ROLL"
+        android:id="@+id/saveButton1"
+        android:layout_alignTop="@+id/rollButton"
+        android:layout_toRightOf="@+id/d8Label"
+        android:layout_toEndOf="@+id/d8Label" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOAD ROLL"
+        android:id="@+id/loadButton1"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

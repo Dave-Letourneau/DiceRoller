@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,7 +14,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // this is just a small piece of text for pushing
+        // To Cole and Faraz: The onCreate method is included by default and
+        // needs to have references to your widgets based on their ID's. Follow the
+        // pattern below to reference widgets by their ID.
+        Button rollDice = (Button) findViewById(R.id.rollButton);
+        Button saveDice = (Button) findViewById(R.id.saveButton1);
+        Button loadDice = (Button) findViewById(R.id.loadButton1);
+        // if you were wondering why the last two have numbers thrown in, it's because
+        // there might be more than one screen where you can save and load dice.
     }
 
     @Override
@@ -20,6 +29,24 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void buttonOnClick(View v) {
+        // Method to handle each button
+        // Currently, the setText is just used to make sure the buttons are being clicked
+        // properly.
+        if (v.getId() == R.id.rollButton) {
+            // the roll dice button was clicked. Change activity, or use a dialogue box?
+            // either way, display results to user.
+            ((Button)v).setText("Test");
+
+        } else if (v.getId() == R.id.saveButton1) {
+            // save button was clicked. Save the current bonuses + dice layout to preferences.
+            ((Button)v).setText("Test2");
+        } else if (v.getId() == R.id.loadButton1) {
+            // load button was clicked. Load bonuses + dice layout from preferences.
+            ((Button)v).setText("Test3");
+        }
     }
 
     @Override
