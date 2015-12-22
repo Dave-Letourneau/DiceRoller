@@ -40,13 +40,15 @@ public class MainActivity extends ActionBarActivity {
         // properly.
         if (v.getId() == R.id.rollButton) {
             int[] vals = getDiceNumbers();
+            int bonus = getBonus();
 
             int rollSum = 0;
             for(int n: vals) {
                 // for each number in vals...
                 rollSum += roller(n, vals[n]);
             }
-            // call dialogue pop-up method with results from Roller method
+            rollSum += bonus;
+            // call dialogue pop-up method with rollSum value displayed.
 
         } else if (v.getId() == R.id.saveButton1) {
             // save button was clicked. Save the current bonuses + dice layout to preferences.
@@ -113,5 +115,26 @@ public class MainActivity extends ActionBarActivity {
         vals[5] = Integer.parseInt(d20num.getText().toString());
         vals[6] = Integer.parseInt(d100num.getText().toString());
         return vals;
+    }
+
+    public int getBonus() {
+
+        EditText d4bonus = (EditText) findViewById(R.id.d4Bonus);
+        EditText d6bonus = (EditText) findViewById(R.id.d6Bonus);
+        EditText d8bonus = (EditText) findViewById(R.id.d8Bonus);
+        EditText d10bonus = (EditText) findViewById(R.id.d10Bonus);
+        EditText d12bonus = (EditText) findViewById(R.id.d12Bonus);
+        EditText d20bonus = (EditText) findViewById(R.id.d20Bonus);
+        EditText d100bonus = (EditText) findViewById(R.id.d100Bonus);
+
+        int d4 = Integer.parseInt(d4bonus.getText().toString());
+        int d6 = Integer.parseInt(d6bonus.getText().toString());
+        int d8 = Integer.parseInt(d8bonus.getText().toString());
+        int d10 = Integer.parseInt(d10bonus.getText().toString());
+        int d12 = Integer.parseInt(d12bonus.getText().toString());
+        int d20 = Integer.parseInt(d20bonus.getText().toString());
+        int d100 = Integer.parseInt(d100bonus.getText().toString());
+
+        return (d4 + d6 + d8 + d10 + d12 + d20 + d100);
     }
 }
