@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -36,9 +39,32 @@ public class MainActivity extends ActionBarActivity {
         // Currently, the setText is just used to make sure the buttons are being clicked
         // properly.
         if (v.getId() == R.id.rollButton) {
-            // the roll dice button was clicked. Change activity, or use a dialogue box?
-            // either way, display results to user.
-            ((Button)v).setText("Test");
+            // create EditTexts corresponding to the blanks on the app design
+            // the following process of creating EditText and intitializing the array values is
+            // not very effective. Can we change it to something more flexible?
+            EditText d4num = (EditText) findViewById(R.id.d4numBox);
+            EditText d6num = (EditText) findViewById(R.id.d6numBox);
+            EditText d8num = (EditText) findViewById(R.id.d8numBox);
+            EditText d10num = (EditText) findViewById(R.id.d10numBox);
+            EditText d12num = (EditText) findViewById(R.id.d12numBox);
+            EditText d20num = (EditText) findViewById(R.id.d20numBox);
+            EditText d100num = (EditText) findViewById(R.id.d100numBox);
+            // array to hold their values
+            int[] vals = new int[7];
+            vals[0] = Integer.parseInt(d4num.getText().toString());
+            vals[1] = Integer.parseInt(d6num.getText().toString());
+            vals[2] = Integer.parseInt(d8num.getText().toString());
+            vals[3] = Integer.parseInt(d10num.getText().toString());
+            vals[4] = Integer.parseInt(d12num.getText().toString());
+            vals[5] = Integer.parseInt(d20num.getText().toString());
+            vals[6] = Integer.parseInt(d100num.getText().toString());
+
+            int rollSum = 0;
+            for(int n: vals) {
+                // for each number in vals...
+                rollSum += roller(n, vals[n]);
+            }
+            // call dialogue pop-up method with results from Roller method
 
         } else if (v.getId() == R.id.saveButton1) {
             // save button was clicked. Save the current bonuses + dice layout to preferences.
@@ -63,4 +89,23 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public int roller(int dice, int num) {
+        Random rand = new Random();
+        int displacement = 0; // number used to convert index dice into an actual dice
+        if (dice <= 4) {
+            displacement = 4 + (2*dice);
+        } else if (dice == 5) {
+            displacement = 20;
+        } else {
+            displacement = 100;
+        }
+
+        int total = 0;
+        for (int i = 0; i < num; i++) {
+            total += rand.nextInt(displacement) + 1;
+        }
+        return total;
+    }
+
 }

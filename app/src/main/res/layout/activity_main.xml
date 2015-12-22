@@ -16,8 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
-        android:layout_alignRight="@+id/d10numBox"
-        android:layout_alignEnd="@+id/d10numBox" />
+        android:layout_toLeftOf="@+id/rollButton"
+        android:layout_toStartOf="@+id/rollButton" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         android:background="#ff000000"
         android:layout_below="@+id/d4numBox"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
         android:layout_alignRight="@+id/d4numBox"
         android:layout_alignEnd="@+id/d4numBox" />
 
@@ -59,10 +59,10 @@
         android:background="#ff000000"
         android:layout_below="@+id/d8numBox"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="false"
         android:layout_marginTop="38dp"
-        android:layout_alignRight="@+id/d12numBox"
-        android:layout_alignEnd="@+id/d12numBox" />
+        android:layout_alignRight="@+id/d8numBox"
+        android:layout_alignEnd="@+id/d8numBox" />
 
     <EditText
         android:layout_width="75dp"
@@ -76,8 +76,8 @@
         android:layout_below="@+id/d10numBox"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
-        android:layout_alignRight="@+id/d20numBox"
-        android:layout_alignEnd="@+id/d20numBox" />
+        android:layout_alignRight="@+id/d10numBox"
+        android:layout_alignEnd="@+id/d10numBox" />
 
     <EditText
         android:layout_width="75dp"
@@ -90,7 +90,9 @@
         android:background="#ff000000"
         android:layout_below="@+id/d12numBox"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="false"
+        android:layout_alignRight="@+id/d12numBox"
+        android:layout_alignEnd="@+id/d12numBox" />
 
     <EditText
         android:layout_width="75dp"
@@ -103,7 +105,9 @@
         android:background="#ff000000"
         android:layout_below="@+id/d20numBox"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="false"
+        android:layout_toLeftOf="@+id/rollButton"
+        android:layout_toStartOf="@+id/rollButton" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -176,9 +180,9 @@
         android:id="@+id/d4Bonus"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/d6numBox"
+        android:layout_toLeftOf="@+id/loadButton1"
+        android:layout_toStartOf="@+id/loadButton1" />
 
     <EditText
         android:layout_width="75dp"
@@ -189,8 +193,8 @@
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d8numBox"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toLeftOf="@+id/loadButton1"
+        android:layout_toStartOf="@+id/loadButton1" />
 
     <EditText
         android:layout_width="75dp"
@@ -201,8 +205,8 @@
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d10numBox"
-        android:layout_alignRight="@+id/d6Bonus"
-        android:layout_alignEnd="@+id/d6Bonus" />
+        android:layout_toLeftOf="@+id/loadButton1"
+        android:layout_toStartOf="@+id/loadButton1" />
 
     <EditText
         android:layout_width="75dp"
@@ -213,8 +217,8 @@
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d12numBox"
-        android:layout_alignRight="@+id/d8Bonus"
-        android:layout_alignEnd="@+id/d8Bonus" />
+        android:layout_toLeftOf="@+id/loadButton1"
+        android:layout_toStartOf="@+id/loadButton1" />
 
     <EditText
         android:layout_width="75dp"
@@ -237,8 +241,8 @@
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d100numBox"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toLeftOf="@+id/loadButton1"
+        android:layout_toStartOf="@+id/loadButton1" />
 
     <EditText
         android:layout_width="75dp"
