@@ -39,25 +39,7 @@ public class MainActivity extends ActionBarActivity {
         // Currently, the setText is just used to make sure the buttons are being clicked
         // properly.
         if (v.getId() == R.id.rollButton) {
-            // create EditTexts corresponding to the blanks on the app design
-            // the following process of creating EditText and intitializing the array values is
-            // not very effective. Can we change it to something more flexible?
-            EditText d4num = (EditText) findViewById(R.id.d4numBox);
-            EditText d6num = (EditText) findViewById(R.id.d6numBox);
-            EditText d8num = (EditText) findViewById(R.id.d8numBox);
-            EditText d10num = (EditText) findViewById(R.id.d10numBox);
-            EditText d12num = (EditText) findViewById(R.id.d12numBox);
-            EditText d20num = (EditText) findViewById(R.id.d20numBox);
-            EditText d100num = (EditText) findViewById(R.id.d100numBox);
-            // array to hold their values
-            int[] vals = new int[7];
-            vals[0] = Integer.parseInt(d4num.getText().toString());
-            vals[1] = Integer.parseInt(d6num.getText().toString());
-            vals[2] = Integer.parseInt(d8num.getText().toString());
-            vals[3] = Integer.parseInt(d10num.getText().toString());
-            vals[4] = Integer.parseInt(d12num.getText().toString());
-            vals[5] = Integer.parseInt(d20num.getText().toString());
-            vals[6] = Integer.parseInt(d100num.getText().toString());
+            int[] vals = getDiceNumbers();
 
             int rollSum = 0;
             for(int n: vals) {
@@ -108,4 +90,28 @@ public class MainActivity extends ActionBarActivity {
         return total;
     }
 
+
+    public int[] getDiceNumbers() {
+
+        // create EditTexts corresponding to the blanks on the app design
+        // the following process of creating EditText and intitializing the array values is
+        // not very effective. Can we change it to something more flexible?
+        EditText d4num = (EditText) findViewById(R.id.d4numBox);
+        EditText d6num = (EditText) findViewById(R.id.d6numBox);
+        EditText d8num = (EditText) findViewById(R.id.d8numBox);
+        EditText d10num = (EditText) findViewById(R.id.d10numBox);
+        EditText d12num = (EditText) findViewById(R.id.d12numBox);
+        EditText d20num = (EditText) findViewById(R.id.d20numBox);
+        EditText d100num = (EditText) findViewById(R.id.d100numBox);
+        // array to hold their values
+        int[] vals = new int[7];
+        vals[0] = Integer.parseInt(d4num.getText().toString());
+        vals[1] = Integer.parseInt(d6num.getText().toString());
+        vals[2] = Integer.parseInt(d8num.getText().toString());
+        vals[3] = Integer.parseInt(d10num.getText().toString());
+        vals[4] = Integer.parseInt(d12num.getText().toString());
+        vals[5] = Integer.parseInt(d20num.getText().toString());
+        vals[6] = Integer.parseInt(d100num.getText().toString());
+        return vals;
+    }
 }
