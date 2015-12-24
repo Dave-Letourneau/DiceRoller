@@ -1,5 +1,6 @@
 package com.example.david.diceroller;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 
 
@@ -96,24 +98,27 @@ public class MainActivity extends ActionBarActivity {
     public int[] getDiceNumbers() {
 
         // create EditTexts corresponding to the blanks on the app design
-        // the following process of creating EditText and intitializing the array values is
-        // not very effective. Can we change it to something more flexible?
-        EditText d4num = (EditText) findViewById(R.id.d4numBox);
-        EditText d6num = (EditText) findViewById(R.id.d6numBox);
-        EditText d8num = (EditText) findViewById(R.id.d8numBox);
-        EditText d10num = (EditText) findViewById(R.id.d10numBox);
-        EditText d12num = (EditText) findViewById(R.id.d12numBox);
-        EditText d20num = (EditText) findViewById(R.id.d20numBox);
-        EditText d100num = (EditText) findViewById(R.id.d100numBox);
         // array to hold their values
         int[] vals = new int[7];
-        vals[0] = Integer.parseInt(d4num.getText().toString());
-        vals[1] = Integer.parseInt(d6num.getText().toString());
-        vals[2] = Integer.parseInt(d8num.getText().toString());
-        vals[3] = Integer.parseInt(d10num.getText().toString());
-        vals[4] = Integer.parseInt(d12num.getText().toString());
-        vals[5] = Integer.parseInt(d20num.getText().toString());
-        vals[6] = Integer.parseInt(d100num.getText().toString());
+        //
+        for (int i = 0; i < 7; i++) {
+            int disp = 0; // disp stands for displacement.
+            // This step is needed because the ID's for the dice correspond to themselves, rather than
+            // index positions in the array. If it becomes to inefficient to calculate this,
+            // we can change their ID's to be 0 - 7 respectively.
+            if (i <= 4) {
+                disp = 4 + (2*i);
+            } else if (i == 5) {
+                disp = 20;
+            } else {
+                disp = 100;
+            }
+            String stringId = "d" + disp + "numBox";
+            int textId = getResId(stringId, this, R.id.class); // correct class?
+            EditText diceRef=(EditText)findViewById(textId);
+            vals[i] = Integer.parseInt(diceRef.getText().toString());
+        }
+        //
         return vals;
     }
 
@@ -136,5 +141,17 @@ public class MainActivity extends ActionBarActivity {
         int d100 = Integer.parseInt(d100bonus.getText().toString());
 
         return (d4 + d6 + d8 + d10 + d12 + d20 + d100);
+    }
+
+    public static int getResId(String variableName, Context context, Class<?> c) {
+        // a method to convert a string into a reference ID int value.
+        // Found on google when looking up how to convert strings to ID's.
+        try {
+            Field idField = c.getDeclaredField(variableName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }
