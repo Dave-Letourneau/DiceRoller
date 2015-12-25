@@ -106,6 +106,7 @@ public class MainActivity extends ActionBarActivity {
             // This step is needed because the ID's for the dice correspond to themselves, rather than
             // index positions in the array. If it becomes to inefficient to calculate this,
             // we can change their ID's to be 0 - 7 respectively.
+            // Nothing of value
             if (i <= 4) {
                 disp = 4 + (2*i);
             } else if (i == 5) {
