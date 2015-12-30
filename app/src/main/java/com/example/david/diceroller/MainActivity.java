@@ -109,6 +109,7 @@ public class MainActivity extends ActionBarActivity {
 
         // create EditTexts corresponding to the blanks on the app design
         // array to hold their values
+        //commit
         int[] vals = new int[7];
         //
         for (int i = 0; i < 7; i++) {
