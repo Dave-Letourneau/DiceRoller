@@ -124,8 +124,8 @@ public class MainActivity extends ActionBarActivity {
                 disp = 100;
             }
             String stringId = "d" + disp + "numBox";
-            int textId = getResId(stringId, this, EditText.class); // No error?
-            EditText diceRef=(EditText)findViewById(R.id.d4numBox);
+            int textId = getResId(stringId, this, R.id.class); // No error?
+            EditText diceRef=(EditText)findViewById(textId); // textId
             vals[i] = Integer.parseInt(diceRef.getText().toString());
         }
         //
