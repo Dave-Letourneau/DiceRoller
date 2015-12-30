@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDBHandler extends SQLiteOpenHelper {
     // Basic properties of the database
+    // I made these final so updating them doesn't require updating a million things.
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "presets.db";
 
@@ -95,6 +96,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     public void deletePreset(String presetName) {
+        // for the time being, this method of deletion works only when entering
+        // the name. It will need to be modified so that it works with the delete button instead.
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_PRESETS + " WHERE " + COLUMN_PRESET_NAME + "=\"" + presetName + "\";");
     }
