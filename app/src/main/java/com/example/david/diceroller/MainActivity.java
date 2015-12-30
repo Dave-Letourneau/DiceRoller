@@ -15,6 +15,9 @@ import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
 
+    MyDBHandler handle;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
         Button loadDice = (Button) findViewById(R.id.loadButton1);
         // if you were wondering why the last two have numbers thrown in, it's because
         // there might be more than one screen where you can save and load dice.
+        handle = new MyDBHandler(this, null, null, 1);
     }
 
     @Override
@@ -40,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
         // Method to handle each button
         // Currently, the setText is just used to make sure the buttons are being clicked
         // properly.
+
         if (v.getId() == R.id.rollButton) {
             int[] vals = getDiceNumbers();
             int bonus = getBonus();
@@ -50,10 +55,15 @@ public class MainActivity extends ActionBarActivity {
                 rollSum += roller(n, vals[n]);
             }
             rollSum += bonus;
+            ((Button)v).setText("Test1");
             // call dialogue pop-up method with rollSum value displayed.
 
         } else if (v.getId() == R.id.saveButton1) {
-            // save button was clicked. Save the current bonuses + dice layout to preferences.
+            // save button was clicked. Save the current bonuses + dice layout to database.
+            // Waiting for Cole to create the dialogue.
+           // DicePresets preset = new DicePresets(colesInput.getText().toString());
+           // handle.addPreset(preset);
+            // This above code might ACTUALLY need to go inside the dialogue method.
             ((Button)v).setText("Test2");
         } else if (v.getId() == R.id.loadButton1) {
             // load button was clicked. Load bonuses + dice layout from preferences.
@@ -99,6 +109,7 @@ public class MainActivity extends ActionBarActivity {
 
         // create EditTexts corresponding to the blanks on the app design
         // array to hold their values
+        //commit
         int[] vals = new int[7];
         //
         for (int i = 0; i < 7; i++) {
@@ -106,7 +117,6 @@ public class MainActivity extends ActionBarActivity {
             // This step is needed because the ID's for the dice correspond to themselves, rather than
             // index positions in the array. If it becomes to inefficient to calculate this,
             // we can change their ID's to be 0 - 7 respectively.
-            // Nothing of value
             if (i <= 4) {
                 disp = 4 + (2*i);
             } else if (i == 5) {
@@ -115,8 +125,8 @@ public class MainActivity extends ActionBarActivity {
                 disp = 100;
             }
             String stringId = "d" + disp + "numBox";
-            int textId = getResId(stringId, this, R.id.class); // correct class?
-            EditText diceRef=(EditText)findViewById(textId);
+            int textId = getResId(stringId, this, R.id.class); // No error?
+            EditText diceRef=(EditText)findViewById(textId); // textId
             vals[i] = Integer.parseInt(diceRef.getText().toString());
         }
         //
@@ -124,6 +134,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public int getBonus() {
+        // if the method used above for looping works, I'll update this method
 
         EditText d4bonus = (EditText) findViewById(R.id.d4Bonus);
         EditText d6bonus = (EditText) findViewById(R.id.d6Bonus);
