@@ -227,11 +227,12 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    //adds basic functionality to the load button
     public void loadDialogBox(){
         //variables
         AlertDialog.Builder dialogBuilder;
         dialogBuilder = new AlertDialog.Builder(this);
-        final String[] loadNamesList = {"Load1", "Load2","Load3","Load4","Load5","Load6","Load7","Load8","Load9","Load10"};
+        final String[] loadNamesList = {"Save1", "Save2","Save3","Save4","Save5","Save6","Save7","Save8","Save9","Save10"};
 
         //process
         dialogBuilder.setTitle("Please select your save");
