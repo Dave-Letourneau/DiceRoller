@@ -1,13 +1,17 @@
 package com.example.david.diceroller;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.app.AlertDialog;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -54,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
 
         } else if (v.getId() == R.id.saveButton1) {
             // save button was clicked. Save the current bonuses + dice layout to preferences.
-            ((Button)v).setText("Test2");
+            saveDialogBox();
         } else if (v.getId() == R.id.loadButton1) {
             // load button was clicked. Load bonuses + dice layout from preferences.
             ((Button)v).setText("Test3");
@@ -155,4 +159,45 @@ public class MainActivity extends ActionBarActivity {
             return -1;
         }
     }
+
+    public void saveDialogBox(){
+        AlertDialog.Builder dialogBuilder;
+        //variables
+        dialogBuilder = new AlertDialog.Builder(this);
+
+        final EditText txtInput = new EditText(this);
+        //this gets the input from the user
+
+        //process
+        dialogBuilder.setTitle("Save Name");
+        dialogBuilder.setMessage("What do you want to name your save?");
+        dialogBuilder.setView(txtInput);
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            //when user clicks okay
+            public void onClick(DialogInterface dialog, int which) {
+                String strName = "default";
+                strName = txtInput.getText().toString();
+                Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        // when user clicks cance
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+
+        public void onClick(DialogInterface dialog, int which){
+            Toast.makeText(getApplicationContext(),"Your save has not been named.", Toast.LENGTH_SHORT).show();
+
+
+            dialog.cancel();
+        }
+        });
+
+        //output
+        AlertDialog saveDialog = dialogBuilder.create();
+        saveDialog.show();
+
+
+    }
+
+
 }

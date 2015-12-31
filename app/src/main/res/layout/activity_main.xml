@@ -272,7 +272,8 @@
         android:id="@+id/saveButton1"
         android:layout_alignTop="@+id/rollButton"
         android:layout_toRightOf="@+id/d8Label"
-        android:layout_toEndOf="@+id/d8Label" />
+        android:layout_toEndOf="@+id/d8Label"
+        android:onClick="buttonOnClick" />
 
     <Button
         android:layout_width="wrap_content"
