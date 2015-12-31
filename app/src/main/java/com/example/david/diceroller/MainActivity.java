@@ -47,20 +47,24 @@ public class MainActivity extends ActionBarActivity {
 
         if (v.getId() == R.id.rollButton) {
             int[] vals = getDiceNumbers();
-            int bonus = getBonus();
+            int[] bonus = getBonus();
 
             int rollSum = 0;
             for(int n: vals) {
                 // for each number in vals...
                 rollSum += roller(n, vals[n]);
             }
-            rollSum += bonus;
+            for (int n: bonus) {
+                rollSum += bonus[n];
+            }
+
             ((Button)v).setText("Test1");
             // call dialogue pop-up method with rollSum value displayed.
 
         } else if (v.getId() == R.id.saveButton1) {
             // save button was clicked. Save the current bonuses + dice layout to database.
             // Waiting for Cole to create the dialogue.
+
            // DicePresets preset = new DicePresets(colesInput.getText().toString());
            // handle.addPreset(preset);
             // This above code might ACTUALLY need to go inside the dialogue method.
@@ -127,32 +131,46 @@ public class MainActivity extends ActionBarActivity {
             String stringId = "d" + disp + "numBox";
             int textId = getResId(stringId, this, R.id.class); // No error?
             EditText diceRef=(EditText)findViewById(textId); // textId
-            vals[i] = Integer.parseInt(diceRef.getText().toString());
+            // checking for nulls
+            if (diceRef.getText().toString().equals("")) {
+                vals[i] = 0;
+            } else {
+                vals[i] = Integer.parseInt(diceRef.getText().toString());
+            }
         }
         //
         return vals;
     }
 
-    public int getBonus() {
+    public int[] getBonus() {
         // if the method used above for looping works, I'll update this method
 
-        EditText d4bonus = (EditText) findViewById(R.id.d4Bonus);
-        EditText d6bonus = (EditText) findViewById(R.id.d6Bonus);
-        EditText d8bonus = (EditText) findViewById(R.id.d8Bonus);
-        EditText d10bonus = (EditText) findViewById(R.id.d10Bonus);
-        EditText d12bonus = (EditText) findViewById(R.id.d12Bonus);
-        EditText d20bonus = (EditText) findViewById(R.id.d20Bonus);
-        EditText d100bonus = (EditText) findViewById(R.id.d100Bonus);
-
-        int d4 = Integer.parseInt(d4bonus.getText().toString());
-        int d6 = Integer.parseInt(d6bonus.getText().toString());
-        int d8 = Integer.parseInt(d8bonus.getText().toString());
-        int d10 = Integer.parseInt(d10bonus.getText().toString());
-        int d12 = Integer.parseInt(d12bonus.getText().toString());
-        int d20 = Integer.parseInt(d20bonus.getText().toString());
-        int d100 = Integer.parseInt(d100bonus.getText().toString());
-
-        return (d4 + d6 + d8 + d10 + d12 + d20 + d100);
+        int[] vals = new int[7];
+        //
+        for (int i = 0; i < 7; i++) {
+            int disp = 0; // disp stands for displacement.
+            // This step is needed because the ID's for the dice correspond to themselves, rather than
+            // index positions in the array. If it becomes to inefficient to calculate this,
+            // we can change their ID's to be 0 - 7 respectively.
+            if (i <= 4) {
+                disp = 4 + (2*i);
+            } else if (i == 5) {
+                disp = 20;
+            } else {
+                disp = 100;
+            }
+            String stringId = "d" + disp + "Bonus";
+            int textId = getResId(stringId, this, R.id.class); // No error?
+            EditText diceRef=(EditText)findViewById(textId); // textId
+            // checking for nulls
+            if (diceRef.getText().toString().equals("")) {
+                vals[i] = 0;
+            } else {
+                vals[i] = Integer.parseInt(diceRef.getText().toString());
+            }
+        }
+        //
+        return vals;
     }
 
     public static int getResId(String variableName, Context context, Class<?> c) {
