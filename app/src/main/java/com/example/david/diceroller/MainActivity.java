@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
 
     MyDBHandler handle;
 
-
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
