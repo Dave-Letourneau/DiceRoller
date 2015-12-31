@@ -11,13 +11,16 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d4numBox"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:layout_toLeftOf="@+id/rollButton"
-        android:layout_toStartOf="@+id/rollButton" />
+        android:layout_toStartOf="@+id/rollButton"
+        android:autoText="false"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -25,6 +28,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d6numBox"
+        android:text="0"
         android:layout_marginTop="38dp"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
@@ -32,7 +36,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:layout_alignRight="@+id/d4numBox"
-        android:layout_alignEnd="@+id/d4numBox" />
+        android:layout_alignEnd="@+id/d4numBox"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,6 +45,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d8numBox"
+        android:text="0"
         android:layout_marginTop="38dp"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
@@ -47,7 +53,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/d6numBox"
-        android:layout_alignEnd="@+id/d6numBox" />
+        android:layout_alignEnd="@+id/d6numBox"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -55,6 +62,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d10numBox"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_below="@+id/d8numBox"
@@ -62,7 +70,8 @@
         android:layout_alignParentStart="false"
         android:layout_marginTop="38dp"
         android:layout_alignRight="@+id/d8numBox"
-        android:layout_alignEnd="@+id/d8numBox" />
+        android:layout_alignEnd="@+id/d8numBox"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -70,6 +79,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d12numBox"
+        android:text="0"
         android:layout_marginTop="38dp"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
@@ -77,7 +87,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:layout_alignRight="@+id/d10numBox"
-        android:layout_alignEnd="@+id/d10numBox" />
+        android:layout_alignEnd="@+id/d10numBox"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -85,6 +96,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d20numBox"
+        android:text="0"
         android:layout_marginTop="38dp"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
@@ -92,7 +104,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:layout_alignRight="@+id/d12numBox"
-        android:layout_alignEnd="@+id/d12numBox" />
+        android:layout_alignEnd="@+id/d12numBox"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -100,6 +113,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d100numBox"
+        android:text="0"
         android:layout_marginTop="38dp"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
@@ -107,7 +121,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:layout_toLeftOf="@+id/rollButton"
-        android:layout_toStartOf="@+id/rollButton" />
+        android:layout_toStartOf="@+id/rollButton"
+        android:textColor="#ffffffff" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -178,11 +193,14 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d4Bonus"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d6numBox"
         android:layout_toLeftOf="@+id/loadButton1"
-        android:layout_toStartOf="@+id/loadButton1" />
+        android:layout_toStartOf="@+id/loadButton1"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#00ff7345" />
 
     <EditText
         android:layout_width="75dp"
@@ -190,11 +208,13 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d6Bonus"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d8numBox"
         android:layout_toLeftOf="@+id/loadButton1"
-        android:layout_toStartOf="@+id/loadButton1" />
+        android:layout_toStartOf="@+id/loadButton1"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -202,11 +222,13 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d8Bonus"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d10numBox"
         android:layout_toLeftOf="@+id/loadButton1"
-        android:layout_toStartOf="@+id/loadButton1" />
+        android:layout_toStartOf="@+id/loadButton1"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -214,11 +236,13 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d10Bonus"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d12numBox"
         android:layout_toLeftOf="@+id/loadButton1"
-        android:layout_toStartOf="@+id/loadButton1" />
+        android:layout_toStartOf="@+id/loadButton1"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -226,11 +250,13 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d12Bonus"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d20numBox"
         android:layout_alignRight="@+id/d10Bonus"
-        android:layout_alignEnd="@+id/d10Bonus" />
+        android:layout_alignEnd="@+id/d10Bonus"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -238,11 +264,13 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d20Bonus"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_above="@+id/d100numBox"
         android:layout_toLeftOf="@+id/loadButton1"
-        android:layout_toStartOf="@+id/loadButton1" />
+        android:layout_toStartOf="@+id/loadButton1"
+        android:textColor="#ffffffff" />
 
     <EditText
         android:layout_width="75dp"
@@ -250,11 +278,13 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/d100Bonus"
+        android:text="0"
         android:backgroundTint="#ff646464"
         android:background="#ff000000"
         android:layout_alignBottom="@+id/d100numBox"
         android:layout_alignRight="@+id/d20Bonus"
-        android:layout_alignEnd="@+id/d20Bonus" />
+        android:layout_alignEnd="@+id/d20Bonus"
+        android:textColor="#ffffffff" />
 
     <Button
         android:layout_width="120dp"
@@ -263,7 +293,8 @@
         android:id="@+id/rollButton"
         android:layout_below="@+id/d100numBox"
         android:layout_toLeftOf="@+id/d8Label"
-        android:layout_toStartOf="@+id/d8Label" />
+        android:layout_toStartOf="@+id/d8Label"
+        android:onClick="buttonOnClick" />
 
     <Button
         android:layout_width="120dp"
@@ -281,6 +312,7 @@
         android:text="LOAD ROLL"
         android:id="@+id/loadButton1"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="buttonOnClick" />
 
 </RelativeLayout>
