@@ -75,6 +75,7 @@ public class MainActivity extends ActionBarActivity {
             ((Button)v).setText("Test2");
         } else if (v.getId() == R.id.loadButton1) {
             // load button was clicked. Load bonuses + dice layout from preferences.
+            loadDialogBox();
             ((Button)v).setText("Test3");
         }
     }
@@ -224,6 +225,27 @@ public class MainActivity extends ActionBarActivity {
         saveDialog.show();
 
 
+    }
+
+    public void loadDialogBox(){
+        //variables
+        AlertDialog.Builder dialogBuilder;
+        dialogBuilder = new AlertDialog.Builder(this);
+        final String[] loadNamesList = {"Load1", "Load2","Load3","Load4","Load5","Load6","Load7","Load8","Load9","Load10"};
+
+        //process
+        dialogBuilder.setTitle("Please select your save");
+        dialogBuilder.setSingleChoiceItems(loadNamesList, -1, new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                String loadName = loadNamesList[which];
+                Toast.makeText(getApplicationContext(),"You have picked a saved roll.", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        //output
+        AlertDialog saveDialog = dialogBuilder.create();
+        saveDialog.show();
     }
 
 }
