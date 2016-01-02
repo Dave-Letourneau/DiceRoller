@@ -17,10 +17,10 @@ import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    // this holds the database for saving presets
     MyDBHandler handle;
+    // TO_DO: ArrayList global variable.
 
-    // k
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +66,11 @@ public class MainActivity extends ActionBarActivity {
 
         } else if (v.getId() == R.id.saveButton1) {
             // save button was clicked. Save the current bonuses + dice layout to database.
-            // Waiting for Cole to create the dialogue.
+            // We need the arrays so we can pass these values to the preset objects.
+            int[] vals = getDiceNumbers();
+            int[] bonus = getBonus();
 
-           // DicePresets preset = new DicePresets(colesInput.getText().toString());
-           // handle.addPreset(preset);
-            // This above code might ACTUALLY need to go inside the dialogue method.
-            saveDialogBox();
+            saveDialogBox(vals, bonus);
             ((Button)v).setText("Test2");
         } else if (v.getId() == R.id.loadButton1) {
             // load button was clicked. Load bonuses + dice layout from preferences.
@@ -190,13 +189,38 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void saveDialogBox(){
+    public void saveDialogBox(int[] numDice, int[] bonus){
         AlertDialog.Builder dialogBuilder;
         //variables
         dialogBuilder = new AlertDialog.Builder(this);
 
         final EditText txtInput = new EditText(this);
         //this gets the input from the user
+
+        // Handler to record preset into database
+        DicePresets preset = new DicePresets(txtInput.getText().toString());
+        preset.set_d4Num(numDice[0]);
+        preset.set_d4Bonus(bonus[0]);
+
+        preset.set_d6Num(numDice[1]);
+        preset.set_d6Bonus(bonus[1]);
+
+        preset.set_d8Num(numDice[2]);
+        preset.set_d8Bonus(bonus[2]);
+
+        preset.set_d10Num(numDice[3]);
+        preset.set_d10Bonus(bonus[3]);
+
+        preset.set_d12Num(numDice[4]);
+        preset.set_d12Bonus(bonus[4]);
+
+        preset.set_d20Num(numDice[5]);
+        preset.set_d20Bonus(bonus[5]);
+
+        preset.set_d100Num(numDice[6]);
+        preset.set_d100Bonus(bonus[6]);
+        handle.addPreset(preset);
+        //
 
         //process
         dialogBuilder.setTitle("Save Name");
@@ -208,10 +232,12 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String strName = "default";
                 strName = txtInput.getText().toString();
+                // TO_DO: Contains check
+                // TO_DO: add to arrayList strName;
                 Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_SHORT).show();
             }
         });
-        // when user clicks cance
+        // when user clicks cancel
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
 
             public void onClick(DialogInterface dialog, int which){
@@ -232,13 +258,17 @@ public class MainActivity extends ActionBarActivity {
         //variables
         AlertDialog.Builder dialogBuilder;
         dialogBuilder = new AlertDialog.Builder(this);
-        final String[] loadNamesList = {"Save1", "Save2","Save3","Save4","Save5","Save6","Save7","Save8","Save9","Save10"};
+        final String[] loadNamesList = {"Save1","Save2","Save3","Save4","Save5","Save6","Save7","Save8","Save9","Save10"};
+        // final String[] dcl;
+        // dcl = (Parameter);
 
         //process
         dialogBuilder.setTitle("Please select your save");
         dialogBuilder.setSingleChoiceItems(loadNamesList, -1, new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which){
                 String loadName = loadNamesList[which];
+                // Load values here
+                // loadPreset(loadName);
                 Toast.makeText(getApplicationContext(),"You have picked a saved roll.", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
