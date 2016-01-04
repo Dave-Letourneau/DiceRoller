@@ -30,9 +30,26 @@ public class DicePresets {
     private int _d20Bonus;
     private int _d100Bonus;
 
-    public DicePresets(String _presetName) {
+    public DicePresets(String _presetName, int _d4Num, int _d6Num, int _d8Num, int _d10Num, int _d12Num, int _d20Num,
+                       int _d100Num, int _d4Bonus, int _d6Bonus, int _d8Bonus, int _d10Bonus, int _d12Bonus, int _d20Bonus,
+                       int _d100Bonus) {
         // Constructor to allow user to name their preset
         this._presetName = _presetName;
+        this._d4Num = _d4Num;
+        this._d6Num = _d6Num;
+        this._d8Num = _d8Num;
+        this._d10Num = _d10Num;
+        this._d12Num = _d12Num;
+        this._d20Num = _d20Num;
+        this._d100Num = _d100Num;
+
+        this._d4Bonus = _d4Bonus;
+        this._d6Bonus = _d6Bonus;
+        this._d8Bonus = _d8Bonus;
+        this._d10Bonus = _d10Bonus;
+        this._d12Bonus = _d12Bonus;
+        this._d20Bonus = _d20Bonus;
+        this._d100Bonus = _d100Bonus;
     }
 
 

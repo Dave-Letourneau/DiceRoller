@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -20,6 +21,8 @@ public class MainActivity extends ActionBarActivity {
     // this holds the database for saving presets
     MyDBHandler handle;
     // TO_DO: ArrayList global variable.
+    public ArrayList<String> LOAD_LIST  = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends ActionBarActivity {
         // To Cole and Faraz: The onCreate method is included by default and
         // needs to have references to your widgets based on their ID's. Follow the
         // pattern below to reference widgets by their ID.
+        LOAD_LIST.add("Sup");
+        LOAD_LIST.add("Save2");
         Button rollDice = (Button) findViewById(R.id.rollButton);
         Button saveDice = (Button) findViewById(R.id.saveButton1);
         Button loadDice = (Button) findViewById(R.id.loadButton1);
@@ -197,30 +202,9 @@ public class MainActivity extends ActionBarActivity {
         final EditText txtInput = new EditText(this);
         //this gets the input from the user
 
-        // Handler to record preset into database
-        DicePresets preset = new DicePresets(txtInput.getText().toString());
-        preset.set_d4Num(numDice[0]);
-        preset.set_d4Bonus(bonus[0]);
-
-        preset.set_d6Num(numDice[1]);
-        preset.set_d6Bonus(bonus[1]);
-
-        preset.set_d8Num(numDice[2]);
-        preset.set_d8Bonus(bonus[2]);
-
-        preset.set_d10Num(numDice[3]);
-        preset.set_d10Bonus(bonus[3]);
-
-        preset.set_d12Num(numDice[4]);
-        preset.set_d12Bonus(bonus[4]);
-
-        preset.set_d20Num(numDice[5]);
-        preset.set_d20Bonus(bonus[5]);
-
-        preset.set_d100Num(numDice[6]);
-        preset.set_d100Bonus(bonus[6]);
-        handle.addPreset(preset);
-        //
+        // Arrays needed to be declared final.
+        final int[] ar1 = numDice;
+        final int[] ar2 = bonus;
 
         //process
         dialogBuilder.setTitle("Save Name");
@@ -231,17 +215,29 @@ public class MainActivity extends ActionBarActivity {
             //when user clicks okay
             public void onClick(DialogInterface dialog, int which) {
                 String strName = "default";
-                strName = txtInput.getText().toString();
-                // TO_DO: Contains check
-                // TO_DO: add to arrayList strName;
-                Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_SHORT).show();
+                boolean unique = false;
+                do {
+                    strName = txtInput.getText().toString();
+                    // Added a check to make sure that the save name is unique
+                    if (LOAD_LIST.contains(strName)) {
+                        Toast.makeText(getApplicationContext(), "This name has already been used. Please select another.", Toast.LENGTH_LONG).show();
+                    }else{
+                        //Added the save name to the global arrayList
+                        unique = true;
+                        LOAD_LIST.add(strName);
+                        // Add the preset to the database
+                        addPreset(strName, ar1, ar2);
+                        Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_LONG).show();
+
+                    }
+                } while(!unique);
             }
         });
         // when user clicks cancel
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
 
             public void onClick(DialogInterface dialog, int which){
-                Toast.makeText(getApplicationContext(),"Your save has not been named.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Your save has not been named.", Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }
         });
@@ -258,18 +254,18 @@ public class MainActivity extends ActionBarActivity {
         //variables
         AlertDialog.Builder dialogBuilder;
         dialogBuilder = new AlertDialog.Builder(this);
-        final String[] loadNamesList = {"Save1","Save2","Save3","Save4","Save5","Save6","Save7","Save8","Save9","Save10"};
+        final String loadNamesList[]= LOAD_LIST.toArray(new String[LOAD_LIST.size()]);
         // final String[] dcl;
         // dcl = (Parameter);
 
         //process
         dialogBuilder.setTitle("Please select your save");
-        dialogBuilder.setSingleChoiceItems(loadNamesList, -1, new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int which){
+        dialogBuilder.setSingleChoiceItems(loadNamesList, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 String loadName = loadNamesList[which];
                 // Load values here
                 // loadPreset(loadName);
-                Toast.makeText(getApplicationContext(),"You have picked a saved roll.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "You have picked a saved roll.", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -279,4 +275,10 @@ public class MainActivity extends ActionBarActivity {
         saveDialog.show();
     }
 
+    public void addPreset(String name, int[] numDice, int[] bonus) {
+        DicePresets preset = new DicePresets(name, numDice[0], numDice[1], numDice[2], numDice[3], numDice[4], numDice[5], numDice[6],
+                bonus[0], bonus[1], bonus[2], bonus[3], bonus[4], bonus[5], bonus[6]);
+        // Toast.makeText(getApplicationContext(), "" + preset.get_d4Num(), Toast.LENGTH_SHORT).show();
+         handle.addPreset(preset);
+    }
 }

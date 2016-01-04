@@ -41,10 +41,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Because databases use SQL format and I have no experience with it, I can't really
-        // explain all this very well. I followed a guide online on using SQL.
         String query = " CREATE TABLE " + TABLE_PRESETS + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_PRESET_NAME + " TEXT " +
                 COLUMN_D4_NUM + " INTEGER " +
                 COLUMN_D6_NUM + " INTEGER " +
@@ -71,7 +69,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     public void addPreset(DicePresets preset) {
-        SQLiteDatabase db = getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(COLUMN_PRESET_NAME, preset.get_presetName());
         // put in number of respective dice into table
@@ -91,6 +89,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_D20_BONUS, preset.get_d20Bonus());
         values.put(COLUMN_D100_BONUS, preset.get_d100Bonus());
         // commit these changes to the name of the user's preset.
+        SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_PRESETS, null, values);
         db.close();
     }
