@@ -52,6 +52,10 @@ public class DicePresets {
         this._d100Bonus = _d100Bonus;
     }
 
+    public DicePresets() {
+        // default construtor with no parameters
+    }
+
 
     // The setter methods for each field.
     // In the future, I might replace these with a single

@@ -28,11 +28,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // To Cole and Faraz: The onCreate method is included by default and
         // needs to have references to your widgets based on their ID's. Follow the
         // pattern below to reference widgets by their ID.
-        LOAD_LIST.add("Sup");
-        LOAD_LIST.add("Save2");
         Button rollDice = (Button) findViewById(R.id.rollButton);
         Button saveDice = (Button) findViewById(R.id.saveButton1);
         Button loadDice = (Button) findViewById(R.id.loadButton1);
@@ -250,35 +249,70 @@ public class MainActivity extends ActionBarActivity {
     }
 
     //adds basic functionality to the load button
-    public void loadDialogBox(){
-        //variables
-        AlertDialog.Builder dialogBuilder;
-        dialogBuilder = new AlertDialog.Builder(this);
-        final String loadNamesList[]= LOAD_LIST.toArray(new String[LOAD_LIST.size()]);
-        // final String[] dcl;
-        // dcl = (Parameter);
+    public void loadDialogBox() {
 
-        //process
-        dialogBuilder.setTitle("Please select your save");
-        dialogBuilder.setSingleChoiceItems(loadNamesList, -1, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                String loadName = loadNamesList[which];
-                // Load values here
-                // loadPreset(loadName);
-                Toast.makeText(getApplicationContext(), "You have picked a saved roll.", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
+        // if statement to check empty list
+        if (LOAD_LIST.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "You have not saved any roll presets.", Toast.LENGTH_LONG).show();
+        } else {
 
-        //output
-        AlertDialog saveDialog = dialogBuilder.create();
-        saveDialog.show();
+            //variables
+            AlertDialog.Builder dialogBuilder;
+            dialogBuilder = new AlertDialog.Builder(this);
+            final String loadNamesList[] = LOAD_LIST.toArray(new String[LOAD_LIST.size()]);
+
+            //process
+            dialogBuilder.setTitle("Please select your save");
+            dialogBuilder.setSingleChoiceItems(loadNamesList, -1, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    String loadName = loadNamesList[which];
+                    // Load values here
+                    loadPreset(loadName);
+                    Toast.makeText(getApplicationContext(), "You have picked a saved roll.", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+
+            });
+
+            //output
+            AlertDialog saveDialog = dialogBuilder.create();
+            saveDialog.show();
+        }
     }
 
     public void addPreset(String name, int[] numDice, int[] bonus) {
+        // Uses the DicePresets constructor to initialize a new preset object with values from the
+        // users edit text fields
         DicePresets preset = new DicePresets(name, numDice[0], numDice[1], numDice[2], numDice[3], numDice[4], numDice[5], numDice[6],
                 bonus[0], bonus[1], bonus[2], bonus[3], bonus[4], bonus[5], bonus[6]);
-        // Toast.makeText(getApplicationContext(), "" + preset.get_d4Num(), Toast.LENGTH_SHORT).show();
          handle.addPreset(preset);
+    }
+
+    public void loadPreset(String loadName) {
+        // When the user loads a presets, this method will place their roll values into the edit
+        // text fields.
+        // Cole, the following method is what's causing errors when clicking on the load button
+        // if you see the Array Successful toast, then we know it's just my phone. Plz report back
+        String useless = handle.getString(loadName);
+        Toast.makeText(getApplicationContext(), "Array successful", Toast.LENGTH_SHORT).show();
+
+        // references to EditText fields
+        EditText d4Num = (EditText)findViewById(R.id.d4numBox);
+        EditText d6Num = (EditText)findViewById(R.id.d6numBox);
+        EditText d8Num = (EditText)findViewById(R.id.d8numBox);
+        EditText d10Num = (EditText)findViewById(R.id.d10numBox);
+        EditText d12Num = (EditText)findViewById(R.id.d12numBox);
+        EditText d20Num = (EditText)findViewById(R.id.d20numBox);
+        EditText d100Num = (EditText)findViewById(R.id.d100numBox);
+
+        EditText d4Bon = (EditText)findViewById(R.id.d4Bonus);
+        EditText d6Bon = (EditText)findViewById(R.id.d6Bonus);
+        EditText d8Bon = (EditText)findViewById(R.id.d8Bonus);
+        EditText d10Bon = (EditText)findViewById(R.id.d10Bonus);
+        EditText d12Bon = (EditText)findViewById(R.id.d12Bonus);
+        EditText d20Bon = (EditText)findViewById(R.id.d20Bonus);
+        EditText d100Bon = (EditText)findViewById(R.id.d100Bonus);
+
+
     }
 }
