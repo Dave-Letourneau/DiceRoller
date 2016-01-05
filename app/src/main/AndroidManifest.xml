@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.david.diceroller2" >
+=======
+    package="com.example.david.diceroller" >
+>>>>>>> 0d6b2def64fe6e90a65ec7006488c2d1ebd25986
 
     <application
         android:allowBackup="true"
