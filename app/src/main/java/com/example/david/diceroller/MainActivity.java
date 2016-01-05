@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.david.diceroller2.R;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
