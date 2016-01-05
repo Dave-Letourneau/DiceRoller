@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
             for (int n: bonus) {
                 rollSum += bonus[n];
             }
-
+            rollDialogBox(vals, bonus, rollSum);
             ((Button)v).setText("Test1");
             // call dialogue pop-up method with rollSum value displayed.
 
@@ -351,6 +351,40 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "Your save has not been replaced.", Toast.LENGTH_LONG).show();
                 dialog.cancel();
+            }
+        });
+        //output
+        AlertDialog saveDialog = dialogBuilder.create();
+        saveDialog.show();
+    }
+
+    //messages are correctly formatted, something strange is happening with the actual roll function
+    //as vals holds the number of that type of die and there are a lot of strange numbers
+    //we will have to fix this later
+    public void rollDialogBox(int[] vals, int[] bonus, int rollSum){
+        AlertDialog.Builder dialogBuilder;
+        //variables
+        dialogBuilder = new AlertDialog.Builder(this);
+
+        //process
+        dialogBuilder.setTitle("Your Roll");
+        dialogBuilder.setMessage(
+                "Die - Roll Total - Bonus\n" +
+                        "d4        -      " + vals[0] + "       -    " + bonus[0] + "\n" +
+                        "d6        -      " + vals[1] + "       -    " + bonus[1] + "\n" +
+                        "d8        -      " + vals[2] + "       -    " + bonus[2] + "\n" +
+                        "d10      -      " + vals[3] + "       -    " + bonus[3] + "\n" +
+                        "d12      -      " + vals[4] + "       -    " + bonus[4] + "\n" +
+                        "d20      -      " + vals[5] + "       -    " + bonus[5] + "\n" +
+                        "d100    -      " + vals[6] + "       -    " + bonus[6] + "\n\n" +
+                        "Total of all rolls and bonuses = " +rollSum);
+        dialogBuilder.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+
+            //when user clicks okay
+            public void onClick(DialogInterface dialog, int which) {
+                //dismisses the dialog box
+                dialog.dismiss();
+
             }
         });
         //output
