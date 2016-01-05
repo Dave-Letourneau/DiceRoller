@@ -287,9 +287,9 @@ public class MainActivity extends ActionBarActivity {
     public void loadPreset(String loadName) {
         // When the user loads a presets, this method will place their roll values into the edit
         // text fields.
-        // Cole, the following method is what's causing errors when clicking on the load button
-        // if you see the Array Successful toast, then we know it's just my phone. Plz report back
-        String useless = handle.getString(loadName);
+        Toast.makeText(getApplicationContext(), "SACK CAGA WAEFGA.", Toast.LENGTH_SHORT).show();
+
+        int v[] = handle.getPreset(loadName);
         Toast.makeText(getApplicationContext(), "Array successful", Toast.LENGTH_SHORT).show();
 
         // references to EditText fields
@@ -308,7 +308,23 @@ public class MainActivity extends ActionBarActivity {
         EditText d12Bon = (EditText)findViewById(R.id.d12Bonus);
         EditText d20Bon = (EditText)findViewById(R.id.d20Bonus);
         EditText d100Bon = (EditText)findViewById(R.id.d100Bonus);
+        Toast.makeText(getApplicationContext(), "Get Refs successful", Toast.LENGTH_SHORT).show();
 
+        d4Num.setText(v[0]);
+        d6Num.setText(v[1]);
+        d8Num.setText(v[2]);
+        d10Num.setText(v[3]);
+        d12Num.setText(v[4]);
+        d20Num.setText(v[5]);
+        d100Num.setText(v[6]);
+        d4Bon.setText(v[7]);
+        d6Bon.setText(v[8]);
+        d8Bon.setText(v[9]);
+        d10Bon.setText(v[10]);
+        d12Bon.setText(v[11]);
+        d20Bon.setText(v[12]);
+        d100Bon.setText(v[13]);
+        Toast.makeText(getApplicationContext(), "Set refs stuck?.", Toast.LENGTH_SHORT).show();
 
     }
 
