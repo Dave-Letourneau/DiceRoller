@@ -360,7 +360,7 @@ public class MainActivity extends ActionBarActivity {
 
     //messages are correctly formatted, something strange is happening with the actual roll function
     //as vals holds the number of that type of die and there are a lot of strange numbers
-    //we will have to fix this later
+    //we will have to fix this later.
     public void rollDialogBox(int[] vals, int[] bonus, int rollSum){
         AlertDialog.Builder dialogBuilder;
         //variables
