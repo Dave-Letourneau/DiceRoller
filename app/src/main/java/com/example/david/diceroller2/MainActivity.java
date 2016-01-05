@@ -287,10 +287,7 @@ public class MainActivity extends ActionBarActivity {
     public void loadPreset(String loadName) {
         // When the user loads a presets, this method will place their roll values into the edit
         // text fields.
-        Toast.makeText(getApplicationContext(), "SACK CAGA WAEFGA.", Toast.LENGTH_SHORT).show();
-
-        int v[] = handle.getPreset(loadName);
-        Toast.makeText(getApplicationContext(), "Array successful", Toast.LENGTH_SHORT).show();
+        DicePresets p = handle.getDice(loadName);
 
         // references to EditText fields
         EditText d4Num = (EditText)findViewById(R.id.d4numBox);
@@ -308,23 +305,26 @@ public class MainActivity extends ActionBarActivity {
         EditText d12Bon = (EditText)findViewById(R.id.d12Bonus);
         EditText d20Bon = (EditText)findViewById(R.id.d20Bonus);
         EditText d100Bon = (EditText)findViewById(R.id.d100Bonus);
-        Toast.makeText(getApplicationContext(), "Get Refs successful", Toast.LENGTH_SHORT).show();
 
-        d4Num.setText(v[0]);
-        d6Num.setText(v[1]);
-        d8Num.setText(v[2]);
-        d10Num.setText(v[3]);
-        d12Num.setText(v[4]);
-        d20Num.setText(v[5]);
-        d100Num.setText(v[6]);
-        d4Bon.setText(v[7]);
-        d6Bon.setText(v[8]);
-        d8Bon.setText(v[9]);
-        d10Bon.setText(v[10]);
-        d12Bon.setText(v[11]);
-        d20Bon.setText(v[12]);
-        d100Bon.setText(v[13]);
-        Toast.makeText(getApplicationContext(), "Set refs stuck?.", Toast.LENGTH_SHORT).show();
+        // set edit texts to corresponding fields
+        // EditText holds strings, so we concatenate the ints into strings.
+        d4Num.setText("" + p.get_d4Num());
+        d6Num.setText("" + p.get_d6Num());
+        d8Num.setText("" + p.get_d8Num());
+        d10Num.setText("" + p.get_d10Num());
+        d12Num.setText("" + p.get_d12Num());
+        d20Num.setText("" + p.get_d20Num());
+        d100Num.setText("" + p.get_d100Num());
+
+        d4Bon.setText("" + p.get_d4Bonus());
+        d6Bon.setText("" + p.get_d6Bonus());
+        d8Bon.setText("" + p.get_d8Bonus());
+        d10Bon.setText("" + p.get_d10Bonus());
+        d12Bon.setText("" + p.get_d12Bonus());
+        d20Bon.setText("" + p.get_d20Bonus());
+        d100Bon.setText("" + p.get_d100Bonus());
+
+        Toast.makeText(getApplicationContext(), "values set.", Toast.LENGTH_SHORT).show();
 
     }
 

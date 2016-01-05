@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDBHandler extends SQLiteOpenHelper {
     // Basic properties of the database
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 26;
     private static final String DATABASE_NAME = "presets.db";
 
     // Corresponding columns based on the fields in DicePresets.java
@@ -101,16 +101,36 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_PRESETS + " WHERE " + COLUMN_PRESET_NAME + "=\"" + presetName + "\";");
     }
 
-    public int[] getPreset(String presetName) {
-        // method to grab a DicePresets object from the table
-        int[] data = new int[14];
-        String selectQuery = "SELECT  * FROM " + TABLE_PRESETS + " WHERE " + COLUMN_PRESET_NAME + "=\"" + presetName + "\";";
+    public DicePresets getDice(String presetName) {
+        // is it possible to return and object? That might be easier.
+        // The object is already stored in the database. I don't think we can simply return it
+        // however, we can create a copy using get / set methods
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        if (!cursor.isAfterLast()) {
-            data[0] = cursor.getInt(cursor.getColumnIndex(presetName));
+        String query = "SELECT * FROM " + TABLE_PRESETS + " WHERE " + COLUMN_PRESET_NAME + " = '" + presetName + "';";
+        Cursor c = db.rawQuery(query, null);
+        if (c != null) {
+            c.moveToFirst();
         }
-        db.close();
-        return data;
+        DicePresets preset = new DicePresets();
+        // give it values
+        preset.set_presetName(presetName);
+        preset.set_d4Num(c.getInt(c.getColumnIndex(COLUMN_D4_NUM)));
+        preset.set_d6Num(c.getInt(c.getColumnIndex(COLUMN_D6_NUM)));
+        preset.set_d8Num(c.getInt(c.getColumnIndex(COLUMN_D8_NUM)));
+        preset.set_d10Num(c.getInt(c.getColumnIndex(COLUMN_D10_NUM)));
+        preset.set_d12Num(c.getInt(c.getColumnIndex(COLUMN_D12_NUM)));
+        preset.set_d20Num(c.getInt(c.getColumnIndex(COLUMN_D20_NUM)));
+        preset.set_d100Num(c.getInt(c.getColumnIndex(COLUMN_D100_NUM)));
+
+        preset.set_d4Bonus(c.getInt(c.getColumnIndex(COLUMN_D4_BONUS)));
+        preset.set_d6Bonus(c.getInt(c.getColumnIndex(COLUMN_D6_BONUS)));
+        preset.set_d8Bonus(c.getInt(c.getColumnIndex(COLUMN_D8_BONUS)));
+        preset.set_d10Bonus(c.getInt(c.getColumnIndex(COLUMN_D10_BONUS)));
+        preset.set_d12Bonus(c.getInt(c.getColumnIndex(COLUMN_D12_BONUS)));
+        preset.set_d20Bonus(c.getInt(c.getColumnIndex(COLUMN_D20_BONUS)));
+        preset.set_d100Bonus(c.getInt(c.getColumnIndex(COLUMN_D100_BONUS)));
+
+        return preset;
+
     }
 }
