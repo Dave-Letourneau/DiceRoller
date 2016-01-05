@@ -1,4 +1,4 @@
-package com.example.david.diceroller;
+package com.example.david.diceroller2;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.david.diceroller2.R;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -216,18 +214,18 @@ public class MainActivity extends ActionBarActivity {
             //when user clicks okay
             public void onClick(DialogInterface dialog, int which) {
                 String strName = "default";
-                    strName = txtInput.getText().toString();
-                    // Added a check to make sure that the save name is unique
-                    if (LOAD_LIST.contains(strName)) {
-                        saveDialogReplace();
-                    }else{
-                        //Added the save name to the global arrayList
-                        LOAD_LIST.add(strName);
-                        // Add the preset to the database
-                        addPreset(strName, ar1, ar2);
-                        Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_LONG).show();
-//
-                    }
+                strName = txtInput.getText().toString();
+                // Added a check to make sure that the save name is unique
+                if (LOAD_LIST.contains(strName)) {
+                    saveDialogReplace();
+                }else{
+                    //Added the save name to the global arrayList
+                    LOAD_LIST.add(strName);
+                    // Add the preset to the database
+                    addPreset(strName, ar1, ar2);
+                    Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
         // when user clicks cancel
@@ -283,7 +281,7 @@ public class MainActivity extends ActionBarActivity {
         // users edit text fields
         DicePresets preset = new DicePresets(name, numDice[0], numDice[1], numDice[2], numDice[3], numDice[4], numDice[5], numDice[6],
                 bonus[0], bonus[1], bonus[2], bonus[3], bonus[4], bonus[5], bonus[6]);
-         handle.addPreset(preset);
+        handle.addPreset(preset);
     }
 
     public void loadPreset(String loadName) {
