@@ -214,22 +214,18 @@ public class MainActivity extends ActionBarActivity {
             //when user clicks okay
             public void onClick(DialogInterface dialog, int which) {
                 String strName = "default";
-                boolean unique = false;
-                do {
                     strName = txtInput.getText().toString();
                     // Added a check to make sure that the save name is unique
                     if (LOAD_LIST.contains(strName)) {
-                        Toast.makeText(getApplicationContext(), "This name has already been used. Please select another.", Toast.LENGTH_LONG).show();
+                        saveDialogReplace();
                     }else{
                         //Added the save name to the global arrayList
-                        unique = true;
                         LOAD_LIST.add(strName);
                         // Add the preset to the database
                         addPreset(strName, ar1, ar2);
                         Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_LONG).show();
 
                     }
-                } while(!unique);
             }
         });
         // when user clicks cancel
@@ -314,5 +310,35 @@ public class MainActivity extends ActionBarActivity {
         EditText d100Bon = (EditText)findViewById(R.id.d100Bonus);
 
 
+    }
+
+    public void saveDialogReplace(){
+        AlertDialog.Builder dialogBuilder;
+        //variables
+        dialogBuilder = new AlertDialog.Builder(this);
+
+        //process
+        dialogBuilder.setTitle("Rename?");
+        dialogBuilder.setMessage("This name has already been used. Would you like to replace it?");
+        dialogBuilder.setPositiveButton("Replace", new DialogInterface.OnClickListener() {
+
+            //when user clicks okay
+            public void onClick(DialogInterface dialog, int which) {
+                //add a method that deletes and then replaces the save
+                Toast.makeText(getApplicationContext(), "Your save has been replaced.", Toast.LENGTH_LONG).show();
+
+            }
+        });
+        // when user clicks cancel
+        dialogBuilder.setNegativeButton("Don't Replace", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Your save has not been replaced.", Toast.LENGTH_LONG).show();
+                dialog.cancel();
+            }
+        });
+        //output
+        AlertDialog saveDialog = dialogBuilder.create();
+        saveDialog.show();
     }
 }
