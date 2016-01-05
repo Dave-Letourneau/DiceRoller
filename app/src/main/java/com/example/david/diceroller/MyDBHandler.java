@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDBHandler extends SQLiteOpenHelper {
     // Basic properties of the database
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "presets.db";
 
     // Corresponding columns based on the fields in DicePresets.java
@@ -104,32 +104,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public int[] getPreset(String presetName) {
         // method to grab a DicePresets object from the table
         int[] data = new int[14];
-        String selectQuery = "SELECT  * FROM " + TABLE_PRESETS;
+        String selectQuery = "SELECT  * FROM " + TABLE_PRESETS + " WHERE " + COLUMN_PRESET_NAME + "=\"" + presetName + "\";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()) {
-            do {
-               data[0] = cursor.getInt(cursor.getColumnIndex(COLUMN_D10_NUM));
-            } while (cursor.moveToNext());
+        if (!cursor.isAfterLast()) {
+            data[0] = cursor.getInt(cursor.getColumnIndex(presetName));
         }
         db.close();
         return data;
-    }
-
-    public String getString(String presetName) {
-        // test method to see if errors are being thrown because of phone data protection.
-        String s = "";
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_PRESETS;
-        Cursor c = db.rawQuery(query, null);
-        c.moveToFirst();
-        while(!c.isAfterLast()){
-            if(c.getString(c.getColumnIndex("presetName")) !=null) {
-                s += c.getString(c.getColumnIndex("presetName"));
-                s += "\n";
-            }
-        }
-        db.close();
-        return s;
     }
 }
