@@ -224,7 +224,7 @@ public class MainActivity extends ActionBarActivity {
                         // Add the preset to the database
                         addPreset(strName, ar1, ar2);
                         Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_LONG).show();
-
+//
                     }
             }
         });
