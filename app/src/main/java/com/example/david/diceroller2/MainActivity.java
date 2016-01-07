@@ -384,7 +384,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-        // when user clicks cancel
+        // when user clicks cancel.
         dialogBuilder.setNegativeButton("Don't Replace", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
