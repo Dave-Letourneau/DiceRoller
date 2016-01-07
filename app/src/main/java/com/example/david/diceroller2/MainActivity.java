@@ -369,6 +369,10 @@ public class MainActivity extends ActionBarActivity {
 
     public void saveDialogReplace(String saveName, int[] vals, int[] bonus){
         AlertDialog.Builder dialogBuilder;
+        // create a duplicates to be declared final
+        final String saveDupe = saveName;
+        final int[] ar1 = vals;
+        final int[] ar2 = bonus;
         //variables
         dialogBuilder = new AlertDialog.Builder(this);
 
@@ -380,6 +384,8 @@ public class MainActivity extends ActionBarActivity {
             //when user clicks okay
             public void onClick(DialogInterface dialog, int which) {
                 //add a method that deletes and then replaces the save
+                handle.deletePreset(saveDupe);
+                addPreset(saveDupe, ar1, ar2);
                 Toast.makeText(getApplicationContext(), "Your save has been replaced.", Toast.LENGTH_LONG).show();
 
             }

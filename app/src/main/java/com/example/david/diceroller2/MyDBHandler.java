@@ -98,7 +98,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         // for the time being, this method of deletion works only when entering
         // the name. It will need to be modified so that it works with the delete button instead.
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_PRESETS + " WHERE " + COLUMN_PRESET_NAME + "=\"" + presetName + "\";");
+        db.execSQL("DELETE FROM " + TABLE_PRESETS + " WHERE " + COLUMN_PRESET_NAME + " = '" + presetName + "';");
     }
 
     public DicePresets getDice(String presetName) {
