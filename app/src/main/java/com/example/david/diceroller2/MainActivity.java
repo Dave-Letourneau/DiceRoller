@@ -256,7 +256,7 @@ public class MainActivity extends ActionBarActivity {
                 strName = txtInput.getText().toString();
                 // Added a check to make sure that the save name is unique
                 if (LOAD_LIST.contains(strName)) {
-                    saveDialogReplace();
+                    saveDialogReplace(strName, ar1, ar2);
                 }else{
                     //Added the save name to the global arrayList
                     LOAD_LIST.add(strName);
@@ -367,7 +367,7 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public void saveDialogReplace(){
+    public void saveDialogReplace(String saveName, int[] vals, int[] bonus){
         AlertDialog.Builder dialogBuilder;
         //variables
         dialogBuilder = new AlertDialog.Builder(this);
