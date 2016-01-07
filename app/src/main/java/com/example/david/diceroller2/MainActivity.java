@@ -55,16 +55,17 @@ public class MainActivity extends ActionBarActivity {
         if (v.getId() == R.id.rollButton) {
             int[] vals = getDiceNumbers();
             int[] bonus = getBonus();
+            int[] subTotals = roller(vals);
 
             int rollSum = 0;
-            for(int n: vals) {
+            for(int n = 0; n < 7; n++) {
                 // for each number in vals...
-                rollSum += roller(n, vals[n]);
+                rollSum += subTotals[n];
             }
-            for (int n: bonus) {
+            for (int n = 0; n < 7; n++) {
                 rollSum += bonus[n];
             }
-            rollDialogBox(vals, bonus, rollSum);
+            rollDialogBox(subTotals, bonus, rollSum);
             ((Button)v).setText("Test1");
             // call dialogue pop-up method with rollSum value displayed.
 
@@ -98,22 +99,60 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public int roller(int dice, int num) {
+    public int[] roller(int[] vals) {
         Random rand = new Random();
-        int displacement = 0; // number used to convert index dice into an actual dice
-        if (dice <= 4) {
-            displacement = 4 + (2*dice);
-        } else if (dice == 5) {
-            displacement = 20;
-        } else {
-            displacement = 100;
-        }
+        int[] values = new int[7];
 
-        int total = 0;
-        for (int i = 0; i < num; i++) {
-            total += rand.nextInt(displacement) + 1;
+        int subValues = 0;
+        int numOfDie = vals[0];
+        for(int i = 0; i < numOfDie; i++){
+            subValues += rand.nextInt(4) + 1;
         }
-        return total;
+        values[0] = subValues;
+
+        subValues = 0;
+        numOfDie = vals[1];
+        for(int i = 0; i < numOfDie; i++){
+            subValues += rand.nextInt(6) + 1;
+        }
+        values[1] = subValues;
+
+        subValues = 0;
+        numOfDie = vals[2];
+        for(int i = 0; i < numOfDie; i++){
+            subValues += rand.nextInt(8) + 1;
+        }
+        values[2] = subValues;
+
+        subValues = 0;
+        numOfDie = vals[3];
+        for(int i = 0; i < numOfDie; i++){
+            subValues += rand.nextInt(10) + 1;
+        }
+        values[3] = subValues;
+
+        subValues = 0;
+        numOfDie = vals[4];
+        for(int i = 0; i < numOfDie; i++){
+            subValues += rand.nextInt(12) + 1;
+        }
+        values[4] = subValues;
+
+        subValues = 0;
+        numOfDie = vals[5];
+        for(int i = 0; i < numOfDie; i++){
+            subValues += rand.nextInt(20) + 1;
+        }
+        values[5] = subValues;
+
+        subValues = 0;
+        numOfDie = vals[6];
+        for(int i = 0; i < numOfDie; i++){
+            subValues += rand.nextInt(100) + 1;
+        }
+        values[6] = subValues;
+
+        return values;
     }
 
 
