@@ -78,8 +78,10 @@ public class MainActivity extends ActionBarActivity {
             saveDialogBox(vals, bonus);
             ((Button)v).setText("Test2");
         } else if (v.getId() == R.id.loadButton1) {
+            int[] vals = getDiceNumbers(); //needs to be fixed?
+            int[] bonus = getBonus(); //needs to be fixed?
             // load button was clicked. Load bonuses + dice layout from preferences.
-            loadDialogBox();
+            loadDialogBox(vals, bonus);
             ((Button)v).setText("Test3");
         }
     }
@@ -284,8 +286,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     //adds basic functionality to the load button
-    public void loadDialogBox() {
+    public void loadDialogBox(int[] vals, int[] bonus) {
 
+        final int[] finalVals = vals;
+        final int[] finalBonus = bonus;
         // if statement to check empty list
         if (LOAD_LIST.isEmpty()) {
             Toast.makeText(getApplicationContext(), "You have not saved any roll presets.", Toast.LENGTH_LONG).show();
@@ -302,8 +306,8 @@ public class MainActivity extends ActionBarActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String loadName = loadNamesList[which];
                     // Load values here
-                    loadPreset(loadName);
-                    Toast.makeText(getApplicationContext(), "You have picked a saved roll.", Toast.LENGTH_SHORT).show();
+                    deleteOrLoad(loadName, finalVals, finalBonus);
+
                     dialog.dismiss();
                 }
 
@@ -422,7 +426,7 @@ public class MainActivity extends ActionBarActivity {
                         "d12      -      " + vals[4] + "       -    " + bonus[4] + "\n" +
                         "d20      -      " + vals[5] + "       -    " + bonus[5] + "\n" +
                         "d100    -      " + vals[6] + "       -    " + bonus[6] + "\n\n" +
-                        "Total of all rolls and bonuses = " +rollSum);
+                        "Total of all rolls and bonuses = " + rollSum);
         dialogBuilder.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
 
             //when user clicks okay
@@ -433,6 +437,38 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         //output
+        AlertDialog saveDialog = dialogBuilder.create();
+        saveDialog.show();
+    }
+
+    //an inner dialog box to go within the onClick method of loadDialogBox
+    public void deleteOrLoad(String loadName, int[] vals, int[] bonus){
+        AlertDialog.Builder dialogBuilder;
+        dialogBuilder = new AlertDialog.Builder(this);
+        final String finalLoadName = loadName;
+        final int[] finalVals = vals;
+        final int[] finalBonus = bonus;
+
+        dialogBuilder.setMessage("Would you like to load or delete your save?");
+        dialogBuilder.setPositiveButton("Load", new DialogInterface.OnClickListener() {
+
+            //when user clicks okay
+            public void onClick(DialogInterface dialog, int which) {
+                loadPreset(finalLoadName);
+                Toast.makeText(getApplicationContext(), "You have picked a saved roll.", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
+            }
+        });
+        // when user clicks cancel
+        dialogBuilder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                //handle.deletePreset(finalLoadName, finalVals, finalBonus);
+                Toast.makeText(getApplicationContext(), "Your save has been deleted.", Toast.LENGTH_LONG).show();
+                dialog.cancel();
+            }
+        });
+
         AlertDialog saveDialog = dialogBuilder.create();
         saveDialog.show();
     }
