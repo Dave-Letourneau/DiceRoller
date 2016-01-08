@@ -463,7 +463,10 @@ public class MainActivity extends ActionBarActivity {
         dialogBuilder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                //handle.deletePreset(finalLoadName, finalVals, finalBonus);
+                // Remove the preset from the database
+                handle.deletePreset(finalLoadName);
+                // Remove the preset from the list
+                LOAD_LIST.remove(finalLoadName);
                 Toast.makeText(getApplicationContext(), "Your save has been deleted.", Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }
