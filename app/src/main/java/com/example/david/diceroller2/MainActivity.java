@@ -65,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
             for (int n = 0; n < 7; n++) {
                 rollSum += bonus[n];
             }
-            rollDialogBox(subTotals, bonus, rollSum);
+            rollDialogBox(subTotals, bonus, rollSum, vals);
             ((Button)v).setText("Test1");
             // call dialogue pop-up method with rollSum value displayed.
 
@@ -410,7 +410,7 @@ public class MainActivity extends ActionBarActivity {
     //messages are correctly formatted, something strange is happening with the actual roll function
     //as vals holds the number of that type of die and there are a lot of strange numbers
     //we will have to fix this later.
-    public void rollDialogBox(int[] vals, int[] bonus, int rollSum){
+    public void rollDialogBox(int[] subTotals, int[] bonus, int rollSum, int[] vals){
         AlertDialog.Builder dialogBuilder;
         //variables
         dialogBuilder = new AlertDialog.Builder(this);
@@ -418,14 +418,14 @@ public class MainActivity extends ActionBarActivity {
         //process
         dialogBuilder.setTitle("Your Roll");
         dialogBuilder.setMessage(
-                "Die - Roll Total - Bonus\n" +
-                        "d4        -      " + vals[0] + "       -    " + bonus[0] + "\n" +
-                        "d6        -      " + vals[1] + "       -    " + bonus[1] + "\n" +
-                        "d8        -      " + vals[2] + "       -    " + bonus[2] + "\n" +
-                        "d10      -      " + vals[3] + "       -    " + bonus[3] + "\n" +
-                        "d12      -      " + vals[4] + "       -    " + bonus[4] + "\n" +
-                        "d20      -      " + vals[5] + "       -    " + bonus[5] + "\n" +
-                        "d100    -      " + vals[6] + "       -    " + bonus[6] + "\n\n" +
+                "Die - # of Die - Roll Total - Bonus\n" +
+                        "d4        -      " + vals[0] + "       -    " + subTotals[0] + "       -    " + bonus[0] + "\n" +
+                        "d6        -      " + vals[1] + "       -    " + subTotals[1] + "       -    " + bonus[1] + "\n" +
+                        "d8        -      " + vals[2] +"       -    " + subTotals[2] + "       -    " + bonus[2] + "\n" +
+                        "d10      -      " + vals[3] + "       -    " + subTotals[3] + "       -    " + bonus[3] + "\n" +
+                        "d12      -      " + vals[4] + "       -    " + subTotals[4] + "       -    " + bonus[4] + "\n" +
+                        "d20      -      " + vals[5] + "       -    " + subTotals[5] + "       -    " + bonus[5] + "\n" +
+                        "d100    -      " + vals[6] + "       -    " + subTotals[6] + "       -    " + bonus[6] + "\n\n" +
                         "Total of all rolls and bonuses = " + rollSum);
         dialogBuilder.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
 
