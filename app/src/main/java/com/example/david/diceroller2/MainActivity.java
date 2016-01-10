@@ -471,6 +471,11 @@ public class MainActivity extends ActionBarActivity {
                 dialog.cancel();
             }
         });
+        dialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
 
         AlertDialog saveDialog = dialogBuilder.create();
         saveDialog.show();
