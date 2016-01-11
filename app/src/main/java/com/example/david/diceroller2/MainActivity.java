@@ -14,29 +14,23 @@ import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
     // this holds the database for saving presets
     MyDBHandler handle;
-    // TO_DO: ArrayList global variable.
-    public ArrayList<String> LOAD_LIST  = new ArrayList<String>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // To Cole and Faraz: The onCreate method is included by default and
-        // needs to have references to your widgets based on their ID's. Follow the
-        // pattern below to reference widgets by their ID.
         Button rollDice = (Button) findViewById(R.id.rollButton);
         Button saveDice = (Button) findViewById(R.id.saveButton1);
         Button loadDice = (Button) findViewById(R.id.loadButton1);
-        // if you were wondering why the last two have numbers thrown in, it's because
-        // there might be more than one screen where you can save and load dice.
+
         handle = new MyDBHandler(this, null, null, 1);
     }
 
@@ -257,14 +251,13 @@ public class MainActivity extends ActionBarActivity {
                 String strName = "default";
                 strName = txtInput.getText().toString();
                 // Added a check to make sure that the save name is unique
-                if (LOAD_LIST.contains(strName)) {
+                if (Arrays.asList(handle.grabNames()).contains(strName)) {
                     saveDialogReplace(strName, ar1, ar2);
                 }else{
-                    //Added the save name to the global arrayList
-                    LOAD_LIST.add(strName);
                     // Add the preset to the database
                     addPreset(strName, ar1, ar2);
-                    Toast.makeText(getApplicationContext(), "Your save has been named.", Toast.LENGTH_LONG).show();
+                    // arrayOfNames = handle.grabNames();
+                    Toast.makeText(getApplicationContext(), "Your preset has been saved.", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -291,20 +284,19 @@ public class MainActivity extends ActionBarActivity {
         final int[] finalVals = vals;
         final int[] finalBonus = bonus;
         // if statement to check empty list
-        if (LOAD_LIST.isEmpty()) {
+        if (Arrays.asList(handle.grabNames()).isEmpty()) {
             Toast.makeText(getApplicationContext(), "You have not saved any roll presets.", Toast.LENGTH_LONG).show();
         } else {
 
             //variables
             AlertDialog.Builder dialogBuilder;
             dialogBuilder = new AlertDialog.Builder(this);
-            final String loadNamesList[] = LOAD_LIST.toArray(new String[LOAD_LIST.size()]);
 
             //process
             dialogBuilder.setTitle("Please select your save");
-            dialogBuilder.setSingleChoiceItems(loadNamesList, -1, new DialogInterface.OnClickListener() {
+            dialogBuilder.setSingleChoiceItems(handle.grabNames(), -1, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    String loadName = loadNamesList[which];
+                    String loadName = handle.grabNames()[which];
                     // Load values here
                     deleteOrLoad(loadName, finalVals, finalBonus);
 
@@ -465,8 +457,6 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Remove the preset from the database
                 handle.deletePreset(finalLoadName);
-                // Remove the preset from the list
-                LOAD_LIST.remove(finalLoadName);
                 Toast.makeText(getApplicationContext(), "Your save has been deleted.", Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }

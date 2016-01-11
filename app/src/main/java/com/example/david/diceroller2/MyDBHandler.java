@@ -6,12 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by David on 12/29/2015.
  */
 public class MyDBHandler extends SQLiteOpenHelper {
     // Basic properties of the database
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 26;
     private static final String DATABASE_NAME = "presets.db";
 
     // Corresponding columns based on the fields in DicePresets.java
@@ -132,6 +134,29 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return preset;
 
+    }
+
+    // loop through names
+    public String[] grabNames() {
+
+        ArrayList<String> LOAD_LIST  = new ArrayList<String>();
+        String[] ret;
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_PRESETS + " WHERE 1";
+
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+
+        while (!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex(COLUMN_PRESET_NAME)) != null) {
+                LOAD_LIST.add(c.getString(c.getColumnIndex(COLUMN_PRESET_NAME)));
+
+            }
+            c.moveToNext();
+        }
+        ret = LOAD_LIST.toArray(new String[LOAD_LIST.size()]);
+        db.close();
+        return ret;
     }
 }
 
